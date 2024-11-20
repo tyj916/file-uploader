@@ -6,11 +6,14 @@
   <title>Sign Up</title>
 </head>
 <body>
+  <h1>Sign Up</h1>
+  <%- include('./partials/formErrors') %>
   <form action="/sign-up" method="POST">
     <input type="text" name="firstName" placeholder="First Name (optional)">
     <input type="text" name="lastName" placeholder="Last Name (optional)">
     <input type="text" name="username" placeholder="Username" required>
     <input type="password" name="password" placeholder="Password" required>
+    <input type="password" name="confirmPassword" placeholder="Confirm password" required>
     <section class="form-button">
       <button type="submit">Sign Up</button>
     </section>

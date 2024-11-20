@@ -43,7 +43,11 @@ passport.deserializeUser(async (id, done) => {
 const authRouter = Router();
 
 authRouter.get('/sign-up', authController.renderSignUp);
-authRouter.post('/sign-up', authController.handleSignUp);
+authRouter.post(
+  '/sign-up', 
+  authController.validateSignUp, 
+  authController.handleSignUp
+);
 authRouter.get('/log-in', authController.renderLogIn);
 authRouter.post(
   '/log-in', 
@@ -53,13 +57,6 @@ authRouter.post(
     failureRedirect: '/log-in',
   })
 );
-authRouter.get('/log-out', (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/');
-  });
-});
+authRouter.get('/log-out', authController.handleLogOut);
 
 module.exports = authRouter;
