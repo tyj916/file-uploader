@@ -12,5 +12,13 @@
   <% } else { %>
     <h1>Hello, world!</h1>
   <% } %>
+
+  <main>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <label for="upload-files">Upload Files</label>
+      <input type="file" name="uploadedFiles" required>
+      <button type="submit">Confirm Upload</button>
+    </form>
+  </main>
 </body>
 </html>
