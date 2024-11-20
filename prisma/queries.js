@@ -12,7 +12,7 @@ async function template() {
 
 async function createUser(user, password) {
   try {
-    const newUser = await prisma.user.create({
+    await prisma.user.create({
       data: {
         firstName: user.firstName,
         lastName: user.lastName,
@@ -20,12 +20,33 @@ async function createUser(user, password) {
         password: password,
       }
     });
-    console.log(newUser);
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+async function getUserById(id) {
+  try {
+    return await prisma.user.findFirst({
+      where: { id: id },
+    });
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+async function getUserByUsername(username) {
+  try {
+    return await prisma.user.findFirst({
+      where: { username: username },
+    });
   } catch(err) {
     console.error(err);
   }
 }
 
 module.exports = {
-  createUser
+  createUser,
+  getUserById,
+  getUserByUsername,
 }

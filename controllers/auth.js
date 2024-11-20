@@ -20,7 +20,17 @@ async function handleSignUp(req, res, next) {
   }
 }
 
+function renderLogIn(req, res) {
+  res.render('logIn');
+}
+
+function handleLogIn(req, res, next) {
+  next();
+}
+
 module.exports = {
   renderSignUp,
   handleSignUp,
+  renderLogIn,
+  handleLogIn,
 }
