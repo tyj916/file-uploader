@@ -60,9 +60,25 @@ function renderLogIn(req, res) {
   res.render('logIn');
 }
 
-function handleLogIn(req, res, next) {
-  next();
-}
+const validateLogIn = [
+  [
+    body('username').trim()
+      .notEmpty().withMessage(`Username ${emptyErr}`)
+      .isLength({ min: 6 }).withMessage(`Username ${minLengthErr}`),
+    body('password')
+      .notEmpty().withMessage(`Password ${emptyErr}`)
+      .isLength({ min: 6 }).withMessage(`Password ${minLengthErr}`),
+  ],
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render('logIn', {
+        errors: errors.array(),
+      });
+    }
+    next();
+  }
+];
 
 function handleLogOut(req, res, next) {
   req.logout((err) => {
@@ -78,6 +94,6 @@ module.exports = {
   validateSignUp,
   handleSignUp,
   renderLogIn,
-  handleLogIn,
+  validateLogIn,
   handleLogOut,
 }

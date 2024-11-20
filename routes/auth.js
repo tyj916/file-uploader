@@ -51,7 +51,7 @@ authRouter.post(
 authRouter.get('/log-in', authController.renderLogIn);
 authRouter.post(
   '/log-in', 
-  authController.handleLogIn,
+  authController.validateLogIn,
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/log-in',
