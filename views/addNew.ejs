@@ -9,8 +9,8 @@
   <%- include('./partials/nav') %>
   <h1>Add New</h1>
   <form action="/file/upload" method="POST" enctype="multipart/form-data">
-    <label for="choose-files">Choose files</label>
-    <input type="file" name="uploadedFiles" onchange="form.submit()" id="choose-files" multiple required>
+    <label for="upload-files">Upload files</label>
+    <input type="file" name="uploadedFiles" onchange="form.submit()" id="upload-files" multiple required>
   </form>
   <p>Or</p>
   <form action="/create-folder" method="POST">
