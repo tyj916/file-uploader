@@ -6,6 +6,7 @@ const { PrismaClient } = require('@prisma/client');
 const passport = require('passport');
 const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
+const filesRouter = require('./routes/files');
 
 const app = express();
 
@@ -36,6 +37,16 @@ app.use(passport.session());
 
 app.use('/', authRouter);
 app.use('/', indexRouter);
+app.use('/file', filesRouter);
+
+app.get('*', (req, res) => {
+  res.render('errorPage', {
+    error: {
+      status: 404,
+      message: 'Page Not Found',
+    }
+  });
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Listening to port ${PORT}...`));

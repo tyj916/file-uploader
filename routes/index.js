@@ -1,16 +1,16 @@
 const { Router } = require('express');
 const indexRouter = Router();
-const multer = require('multer');
-const upload = multer({ dest: './uploads/' });
 
 indexRouter.get('/', (req, res) => {
   res.render('index', {
     user: req.user,
   });
 });
-indexRouter.post('/upload', upload.array('uploadedFiles'), (req, res) => {
-  console.log(req.file, req.body);
-  res.redirect('/');
-});
+
+indexRouter.get('/add-new', (req, res) => {
+  res.render('addNew', {
+    user: req.user,
+  });
+})
 
 module.exports = indexRouter;
