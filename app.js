@@ -7,6 +7,7 @@ const passport = require('passport');
 const indexRouter = require('./routes');
 const authRouter = require('./routes/auth');
 const filesRouter = require('./routes/files');
+const folderRouter = require('./routes/folder');
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use(passport.session());
 app.use('/', authRouter);
 app.use('/', indexRouter);
 app.use('/file', filesRouter);
+app.use('/folder', folderRouter);
 
 app.get('*', (req, res) => {
   res.render('errorPage', {

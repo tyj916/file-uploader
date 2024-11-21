@@ -45,8 +45,23 @@ async function getUserByUsername(username) {
   }
 }
 
+async function createFolder(folderName, user) {
+  try {
+    const result = await prisma.folder.create({
+      data: {
+        name: folderName,
+        ownerId: user.id,
+      }
+    });
+    console.log(result);
+  } catch(err) {
+    console.error(err);
+  }
+}
+
 module.exports = {
   createUser,
   getUserById,
   getUserByUsername,
+  createFolder,
 }

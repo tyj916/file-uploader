@@ -8,13 +8,16 @@
 <body>
   <%- include('./partials/nav') %>
   <h1>Add New</h1>
+  <h2>Files</h2>
   <form action="/file/upload" method="POST" enctype="multipart/form-data">
     <label for="upload-files">Upload files</label>
     <input type="file" name="uploadedFiles" onchange="form.submit()" id="upload-files" multiple required>
   </form>
-  <p>Or</p>
-  <form action="/create-folder" method="POST">
-    <button type="submit">New folder</button>
+  <h3>Or</h3>
+  <h2>Folder</h2>
+  <form action="/folder/create" method="POST">
+    <input type="text" name="folderName" placeholder="New folder name" required>
+    <button type="submit">Create folder</button>
   </form>
 </body>
 </html>
