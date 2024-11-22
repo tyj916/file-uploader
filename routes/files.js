@@ -1,6 +1,8 @@
 const { Router } = require('express');
-const filesRouter = Router();
 const multer = require('multer');
+const filesController = require('../controllers/files');
+
+const filesRouter = Router();
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, './uploads/');
@@ -13,10 +15,7 @@ const upload = multer({ storage: storage });
 
 filesRouter.post('/upload', 
   upload.array('uploadedFiles'), 
-  (req, res) => {
-    console.log(req.files);
-    res.redirect('/');
-  },
+  filesController.handleFileUpload,
 );
 
 module.exports = filesRouter;
