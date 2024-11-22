@@ -10,6 +10,11 @@ async function createUser(user, password) {
         lastName: user.lastName,
         username: user.username,
         password: password,
+        folders: {
+          create: {
+            name: 'My files',
+          }
+        }
       }
     });
   } catch(err) {
@@ -37,12 +42,13 @@ async function getUserByUsername(username) {
   }
 }
 
-async function createFolder(folderName, user) {
+async function createFolder(folderName, owner, parentId) {
   try {
     await prisma.folder.create({
       data: {
         name: folderName,
         ownerId: user.id,
+        parentId: parentId,
       }
     });
   } catch(err) {
