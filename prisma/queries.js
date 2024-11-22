@@ -91,9 +91,23 @@ async function getRootFolderByOwnerId(ownerId) {
   }
 }
 
+async function removeFolderById(folderId) {
+  try {
+    await prisma.folder.delete({
+      where: {
+        id: folderId,
+      },
+    });
+  } catch(err) {
+    console.error(err);
+  }
+}
+
 (async () => {
   console.log(await getUserById(1));
   console.log(await getRootFolderByOwnerId(1));
+  await removeFolderById(3);
+  console.log(await getFolderByFolderId(3));
 })();
 
 module.exports = {
