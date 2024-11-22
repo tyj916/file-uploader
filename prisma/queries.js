@@ -2,14 +2,6 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-async function template() {
-  try {
-
-  } catch(err) {
-    console.error(err);
-  }
-}
-
 async function createUser(user, password) {
   try {
     await prisma.user.create({
@@ -106,7 +98,7 @@ async function removeFolderById(folderId) {
 (async () => {
   console.log(await getUserById(1));
   console.log(await getRootFolderByOwnerId(1));
-  await removeFolderById(3);
+  // await removeFolderById(3);
   console.log(await getFolderByFolderId(3));
 })();
 
@@ -115,4 +107,7 @@ module.exports = {
   getUserById,
   getUserByUsername,
   createFolder,
+  getFolderByFolderId,
+  getRootFolderByOwnerId,
+  removeFolderById,
 }
