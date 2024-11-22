@@ -27,7 +27,7 @@ async function createUser(user, password) {
 
 async function getUserById(id) {
   try {
-    return await prisma.user.findFirst({
+    return await prisma.user.findUnique({
       where: { id: id },
     });
   } catch(err) {
@@ -37,7 +37,7 @@ async function getUserById(id) {
 
 async function getUserByUsername(username) {
   try {
-    return await prisma.user.findFirst({
+    return await prisma.user.findUnique({
       where: { username: username },
     });
   } catch(err) {
@@ -47,17 +47,54 @@ async function getUserByUsername(username) {
 
 async function createFolder(folderName, user) {
   try {
-    const result = await prisma.folder.create({
+    await prisma.folder.create({
       data: {
         name: folderName,
         ownerId: user.id,
       }
     });
-    console.log(result);
   } catch(err) {
     console.error(err);
   }
 }
+
+async function getFolderByFolderId(folderId) {
+  try {
+    return await prisma.folder.findUnique({
+      include: {
+        childFolders: true,
+        files: true,
+      },
+      where: {
+        id: folderId,
+      },
+    })
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+async function getRootFolderByOwnerId(ownerId) {
+  try {
+    return await prisma.folder.findFirst({
+      include: {
+        childFolders: true,
+        files: true,
+      },
+      where: {
+        ownerId: ownerId,
+        parentId: null,
+      }
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+(async () => {
+  console.log(await getUserById(1));
+  console.log(await getRootFolderByOwnerId(1));
+})();
 
 module.exports = {
   createUser,
