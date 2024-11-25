@@ -10,14 +10,17 @@ async function handleCreateFolder(req, res, next) {
   }
 }
 
-function renderFolder(req, res) {
-  const { folderName } = req.params;
-  res.render('folder', {
-    folderName: folderName,
-  });
+async function getFolder(req, res, next) {
+  const user = req.user;
+  const { folderId } = req.params;
+
+  const folder = folderId ? await db.getFolderByFolderId(folderId) : await db.getRootFolderByOwnerId(user.id);
+  res.locals.folder = folder;
+
+  next();
 }
 
 module.exports = {
   handleCreateFolder,
-  renderFolder,
+  getFolder,
 }
