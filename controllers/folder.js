@@ -11,11 +11,16 @@ async function handleCreateFolder(req, res, next) {
 }
 
 async function getFolder(req, res, next) {
-  const user = req.user;
   const { folderId } = req.params;
 
-  const folder = folderId ? await db.getFolderByFolderId(folderId) : await db.getRootFolderByOwnerId(user.id);
-  res.locals.folder = folder;
+  if (folderId) {
+    res.locals.folder = await db.getFolderByFolderId(folderId);
+  } else {
+    if (req.user) {
+      const user = req.user;
+      res.locals.folder = await db.getRootFolderByOwnerId(user.id);
+    }
+  }
 
   next();
 }
