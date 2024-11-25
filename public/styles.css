@@ -1,0 +1,7 @@
+#add-new-form {
+  display: block;
+}
+
+#add-new-form.hide-form {
+  display: none;
+}
