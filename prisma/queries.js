@@ -42,12 +42,12 @@ async function getUserByUsername(username) {
   }
 }
 
-async function createFolder(folderName, owner, parentId) {
+async function createFolder(folderName, userId, parentId) {
   try {
     await prisma.folder.create({
       data: {
         name: folderName,
-        ownerId: user.id,
+        ownerId: userId,
         parentId: parentId,
       }
     });
@@ -64,7 +64,7 @@ async function getFolderByFolderId(folderId) {
         files: true,
       },
       where: {
-        id: folderId,
+        id: +folderId,
       },
     })
   } catch(err) {
