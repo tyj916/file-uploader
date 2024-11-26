@@ -17,7 +17,7 @@ async function getFolder(req, res, next) {
   const { folderId } = req.params;
 
   if (folderId) {
-    res.locals.folder = await db.getFolderByFolderId(folderId);
+    res.locals.folder = await db.getFolderByFolderId(+folderId);
   } else {
     if (req.user) {
       const user = req.user;
@@ -28,7 +28,15 @@ async function getFolder(req, res, next) {
   next();
 }
 
+function renderFolder(req, res) {
+  res.render('index', {
+    user: req.user,
+    folder: res.locals.folder,
+  });
+}
+
 module.exports = {
   handleCreateFolder,
   getFolder,
+  renderFolder,
 }

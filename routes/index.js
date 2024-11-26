@@ -4,12 +4,8 @@ const indexRouter = Router();
 
 indexRouter.get('/',
   folderController.getFolder,
-  (req, res) => {
-  res.render('index', {
-    user: req.user,
-    folder: res.locals.folder,
-  });
-});
+  folderController.renderFolder,
+);
 
 indexRouter.get('/add-new', (req, res) => {
   res.render('addNew', {
