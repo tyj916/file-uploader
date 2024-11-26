@@ -1,4 +1,7 @@
 <section>
+  <% if (folder.parentId) { %>
+    <a href="/folder/<%= folder.parentId %>">&lt; Parent</a>
+  <% } %>
   <h1><%= folder.name %></h1>
   <table>
     <tr>
@@ -10,7 +13,7 @@
     <% folder.childFolders.forEach(folder => { %>
       <tr>
         <td>Folder</td>
-        <td><%= folder.name %></td>
+        <td><a href="/folder/<%= folder.id %>"><%= folder.name %></a></td>
         <td>-</td>
         <td>-</td>
       </tr>
@@ -24,7 +27,4 @@
       </tr>
     <% }); %>
   </table>
-    
-
-    
 </section>
