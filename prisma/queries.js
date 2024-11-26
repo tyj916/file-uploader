@@ -101,13 +101,6 @@ async function removeFolderById(folderId) {
   }
 }
 
-(async () => {
-  console.log(await getUserById(1));
-  console.log(await getRootFolderByOwnerId(1));
-  // await removeFolderById(3);
-  console.log(await getFolderByFolderId(3));
-})();
-
 module.exports = {
   createUser,
   getUserById,
