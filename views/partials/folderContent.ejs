@@ -1,6 +1,12 @@
 <section>
   <h1><%= folder.name %></h1>
   <ul>
-    
+    <% folder.childFolders.forEach(folder => { %>
+      <li><%= folder.name %></li>
+    <% }); %>
+
+    <% folder.files.forEach(file => { %>
+      <li><%= file.name %></li>
+    <% }); %>
   </ul>
 </section>
