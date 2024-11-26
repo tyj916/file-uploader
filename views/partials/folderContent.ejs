@@ -1,12 +1,30 @@
 <section>
   <h1><%= folder.name %></h1>
-  <ul>
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Upload Time</th>
+      <th>Size</th>
+    </tr>
     <% folder.childFolders.forEach(folder => { %>
-      <li><%= folder.name %></li>
+      <tr>
+        <td>Folder</td>
+        <td><%= folder.name %></td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
     <% }); %>
-
     <% folder.files.forEach(file => { %>
-      <li><%= file.name %></li>
+      <tr>
+        <td>File</td>
+        <td><%= file.name %></td>
+        <td><%= file.uploadTime %></td>
+        <td><%= file.size %> bytes</td>
+      </tr>
     <% }); %>
-  </ul>
+  </table>
+    
+
+    
 </section>
