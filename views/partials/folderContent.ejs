@@ -16,6 +16,19 @@
         <td><a href="/folder/<%= folder.id %>"><%= folder.name %></a></td>
         <td>-</td>
         <td>-</td>
+        <td>
+          <a href="/folder/<%= folder.id %>/edit">Edit</a>
+        </td>
+        <td>
+          <form action="/folder/<%= folder.id %>/delete" method="POST">
+            <button 
+              type="submit" 
+              onclick="return confirm('Are you sure you want to delete <%= folder.name %>?')"
+            >
+              Delete
+            </button>
+          </form>
+        </td>
       </tr>
     <% }); %>
     <% folder.files.forEach(file => { %>

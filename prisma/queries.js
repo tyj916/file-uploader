@@ -89,11 +89,26 @@ async function getRootFolderByOwnerId(ownerId) {
   }
 }
 
+async function updateFolder(folderId, newName) {
+  try {
+    await prisma.folder.update({
+      where: {
+        id: +folderId,
+      },
+      data: {
+        name: newName,
+      }
+    });
+  } catch(err) {
+    console.error(err);
+  }
+}
+
 async function removeFolderById(folderId) {
   try {
     await prisma.folder.delete({
       where: {
-        id: folderId,
+        id: +folderId,
       },
     });
   } catch(err) {
@@ -108,5 +123,6 @@ module.exports = {
   createFolder,
   getFolderByFolderId,
   getRootFolderByOwnerId,
+  updateFolder,
   removeFolderById,
 }

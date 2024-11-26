@@ -7,5 +7,8 @@ folderRouter.get('/:folderId',
   folderController.getFolder,
   folderController.renderFolder,
 );
+folderRouter.get('/:folderId/edit', folderController.renderEditFolder);
+folderRouter.post('/:folderId/edit', folderController.handleEditFolder);
+folderRouter.post('/:folderId/delete', folderController.handleDeleteFolder);
 
 module.exports = folderRouter;

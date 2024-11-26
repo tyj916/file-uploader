@@ -35,8 +35,38 @@ function renderFolder(req, res) {
   });
 }
 
+async function renderEditFolder(req, res) {
+  const folder = await db.getFolderByFolderId(req.params.folderId);
+  res.render('editFolder', {
+    user: req.user,
+    folder: folder,
+  });
+}
+
+async function handleEditFolder(req, res) {
+  const { folderId } = req.params;
+  const newName = req.body.name;
+  await db.updateFolder(folderId, newName)
+  res.redirect(`/folder/${folderId}`);
+}
+
+async function handleDeleteFolder(req, res) {
+  const { folderId } = req.params;
+  const parentId = (await db.getFolderByFolderId(folderId)).parentId;
+  await db.removeFolderById(folderId);
+
+  if (parentId) {
+    res.redirect(`/folder/${parentId}`);
+  } else {
+    res.redirect('/');
+  }
+}
+
 module.exports = {
   handleCreateFolder,
   getFolder,
   renderFolder,
+  renderEditFolder,
+  handleEditFolder,
+  handleDeleteFolder,
 }
