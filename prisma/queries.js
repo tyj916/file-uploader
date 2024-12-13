@@ -116,6 +116,29 @@ async function removeFolderById(folderId) {
   }
 }
 
+async function uploadFiles(files, userId, folderId) {
+  try {
+    const data = [];
+    files.forEach(file => {
+      data.push({
+        URL: file.destination,
+        name: file.filename,
+        size: file.size,
+        uploadTime: new Date(),
+        ownerId: +userId,
+        folderId: +folderId,
+      })
+    });
+
+    const uploadedFiles = await prisma.file.createManyAndReturn({
+      data: data,
+    });
+    console.log(uploadedFiles);
+  } catch(err) {
+    console.error(err);
+  }
+}
+
 module.exports = {
   createUser,
   getUserById,
@@ -125,4 +148,5 @@ module.exports = {
   getRootFolderByOwnerId,
   updateFolder,
   removeFolderById,
+  uploadFiles,
 }
