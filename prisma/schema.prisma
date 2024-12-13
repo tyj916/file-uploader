@@ -34,7 +34,7 @@ model File {
   id         Int      @id @default(autoincrement())
   URL        String
   name       String
-  size       String
+  size       Int
   uploadTime DateTime @default(now())
   ownerId    Int
   owner      User     @relation(fields: [ownerId], references: [id])
