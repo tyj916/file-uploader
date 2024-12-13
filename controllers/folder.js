@@ -31,6 +31,7 @@ async function getFolder(req, res, next) {
 function renderFolder(req, res) {
   res.render('index', {
     user: req.user,
+    currentFolderId: res.locals.folder.id,
     folder: res.locals.folder,
   });
 }
