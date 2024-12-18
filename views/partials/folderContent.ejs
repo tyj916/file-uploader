@@ -34,7 +34,7 @@
     <% folder.files.forEach(file => { %>
       <tr>
         <td>File</td>
-        <td><%= file.name %></td>
+        <td><a href="/folder/<%= folder.id %>/file/<%= file.id %>"><%= file.name %></a></td>
         <td><%= file.uploadTime %></td>
         <td><%= file.size %> bytes</td>
       </tr>

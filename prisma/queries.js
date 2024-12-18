@@ -133,7 +133,18 @@ async function uploadFiles(files, userId, folderId) {
     const uploadedFiles = await prisma.file.createManyAndReturn({
       data: data,
     });
-    console.log(uploadedFiles);
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+async function getFileDetailsById(fileId) {
+  try {
+    return await prisma.file.findUnique({
+      where: {
+        id: +fileId,
+      }
+    })
   } catch(err) {
     console.error(err);
   }
@@ -149,4 +160,5 @@ module.exports = {
   updateFolder,
   removeFolderById,
   uploadFiles,
+  getFileDetailsById,
 }

@@ -17,5 +17,6 @@ filesRouter.post('/upload',
   upload.array('uploadedFiles'), 
   filesController.handleFileUpload,
 );
+filesRouter.get('/:fileId', filesController.renderFileDetails);
 
 module.exports = filesRouter;

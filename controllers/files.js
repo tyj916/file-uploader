@@ -8,6 +8,16 @@ async function handleFileUpload(req, res) {
   res.redirect('/');
 }
 
+async function renderFileDetails(req, res) {
+  const { fileId } = req.params;
+  const file = await db.getFileDetailsById(fileId);
+  res.render('fileDetails', {
+    user: req.user,
+    file: file,
+  });
+}
+
 module.exports = {
   handleFileUpload,
+  renderFileDetails,
 }
