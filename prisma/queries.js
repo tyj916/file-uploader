@@ -144,7 +144,34 @@ async function getFileDetailsById(fileId) {
       where: {
         id: +fileId,
       }
-    })
+    });
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+async function updateFile(fileId, newName) {
+  try {
+    return await prisma.file.update({
+      where: {
+        id: +fileId,
+      },
+      data: {
+        name: newName,
+      }
+    });
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+async function removeFileById(fileId) {
+  try {
+    return await prisma.file.delete({
+      where: {
+        id: +fileId,
+      }
+    });
   } catch(err) {
     console.error(err);
   }
@@ -161,4 +188,6 @@ module.exports = {
   removeFolderById,
   uploadFiles,
   getFileDetailsById,
+  updateFile,
+  removeFileById,
 }

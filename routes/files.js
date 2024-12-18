@@ -18,5 +18,8 @@ filesRouter.post('/upload',
   filesController.handleFileUpload,
 );
 filesRouter.get('/:fileId', filesController.renderFileDetails);
+filesRouter.get('/:fileId/edit', filesController.renderEditFile);
+filesRouter.post('/:fileId/edit', filesController.handleEditFile);
+filesRouter.post('/:fileId/delete', filesController.handleDeleteFile);
 
 module.exports = filesRouter;
