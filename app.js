@@ -38,7 +38,7 @@ app.use(passport.session());
 
 app.use('/', authRouter);
 app.use('/', indexRouter);
-app.use('/file', filesRouter);
+app.use('/folder/:folderId/file', filesRouter);
 app.use('/folder', folderRouter);
 
 app.get('*', (req, res) => {

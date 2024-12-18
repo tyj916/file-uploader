@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-filesRouter.post('/upload/folder/:folderId', 
+filesRouter.post('/upload', 
   upload.array('uploadedFiles'), 
   filesController.handleFileUpload,
 );

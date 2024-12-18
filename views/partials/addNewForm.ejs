@@ -1,7 +1,7 @@
 <button id="add-new-button">Add New</button>
 <section id="add-new-form" class="hide-form">
   <h2>Files</h2>
-  <form action="/file/upload/folder/<%= currentFolderId %>" method="POST" enctype="multipart/form-data">
+  <form action="/folder/<%= currentFolderId %>/file/upload" method="POST" enctype="multipart/form-data">
     <label for="upload-files">Upload files</label>
     <input type="file" name="uploadedFiles" onchange="form.submit()" id="upload-files" multiple required>
   </form>
