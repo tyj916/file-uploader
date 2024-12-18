@@ -50,6 +50,11 @@
             </button>
           </form>
         </td>
+        <td>
+          <form action="/folder/<%= file.folderId %>/file/<%= file.id %>/download" method="GET">
+            <button type="submit">Download</button>
+          </form>
+        </td>
       </tr>
     <% }); %>
   </table>

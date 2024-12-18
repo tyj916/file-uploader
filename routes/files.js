@@ -21,5 +21,6 @@ filesRouter.get('/:fileId', filesController.renderFileDetails);
 filesRouter.get('/:fileId/edit', filesController.renderEditFile);
 filesRouter.post('/:fileId/edit', filesController.handleEditFile);
 filesRouter.post('/:fileId/delete', filesController.handleDeleteFile);
+filesRouter.get('/:fileId/download', filesController.handleDownloadFile);
 
 module.exports = filesRouter;

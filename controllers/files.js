@@ -39,10 +39,17 @@ async function handleDeleteFile(req, res) {
   res.redirect(`/folder/${folderId}`);
 }
 
+async function handleDownloadFile(req, res) {
+  const { fileId } = req.params;
+  const file = await db.getFileDetailsById(fileId);
+  res.download(`uploads/${file.name}`);
+}
+
 module.exports = {
   handleFileUpload,
   renderFileDetails,
   renderEditFile,
   handleEditFile,
   handleDeleteFile,
+  handleDownloadFile,
 }
