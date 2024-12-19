@@ -1,6 +1,4 @@
 require('dotenv').config();
-const path = require('node:path');
-const fs = require('fs');
 const https = require('https');
 const cloudinary = require('cloudinary').v2;
 const db = require('../prisma/queries');
@@ -20,7 +18,9 @@ async function handleFileUpload(req, res) {
   files.forEach(async (file) => {
     promises.push(new Promise(async (resolve, reject) => {
       try {
-        const cloudRes = await cloudinary.uploader.upload(file.path, {
+        const b64 = Buffer.from(file.buffer).toString("base64");
+        let dataURI = "data:" + file.mimetype + ";base64," + b64;
+        const cloudRes = await cloudinary.uploader.upload(dataURI, {
           resource_type: 'auto',
         });
 

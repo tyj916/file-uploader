@@ -123,7 +123,7 @@ async function insertFile(file, cloudRes, userId, folderId) {
         id: cloudRes.public_id,
         URL: cloudRes.secure_url,
         type: cloudRes.resource_type,
-        name: file.filename,
+        name: file.originalname,
         size: file.size,
         uploadTime: new Date(),
         ownerId: +userId,
