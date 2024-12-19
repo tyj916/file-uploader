@@ -57,16 +57,8 @@ async function renderEditFile(req, res) {
 
 async function handleEditFile(req, res) {
   const { fileId } = req.params;
-  const oldName = (await db.getFileDetailsById(fileId)).name;
   const newName = req.body.name;
   const { folderId } = await db.updateFile(fileId, newName);
-  fs.rename(
-    `uploads/${oldName}`, 
-    `uploads/${newName}`, 
-    (err) => {
-      console.error(err);
-    },
-  );
   res.redirect(`/folder/${folderId}/file/${fileId}`);
 }
 
