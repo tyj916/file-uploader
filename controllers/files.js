@@ -10,29 +10,30 @@ cloudinary.config({
   api_secret: process.env.CLOUD_SECRET,
 });
 
-async function saveFilesToCloud(files) {
-  const results = [];
-
-  files.forEach(async (file) => {
-    results.push(
-      await cloudinary.uploader.upload(file.path, {
-        resource_type: 'auto',
-        public_id: file.name,
-      })
-    );
-  })
-
-  return results;
-} 
-
 async function handleFileUpload(req, res) {
   const user = req.user;
+  const { files } = req;
   const folderId = req.params.currentFolderId || (await db.getRootFolderByOwnerId(user.id)).id;
-  await db.uploadFiles(req.files, user.id, folderId);
-  const cloudRes = await saveFilesToCloud(req.files);
-  console.log(cloudRes);
+  const promises = [];
 
-  res.redirect('/');
+  files.forEach(async (file) => {
+    promises.push(new Promise(async (resolve, reject) => {
+      try {
+        const cloudRes = await cloudinary.uploader.upload(file.path, {
+          resource_type: 'auto',
+        });
+    
+        await db.insertFile(file, cloudRes.secure_url, user.id, folderId);
+        resolve();
+      } catch(err) {
+        console.error(err);
+        reject();
+      }
+    }));
+  });
+
+  await Promise.all(promises);
+  res.redirect(`/folder/${folderId}`);
 }
 
 async function renderFileDetails(req, res) {
