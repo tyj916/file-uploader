@@ -23,8 +23,8 @@ async function handleFileUpload(req, res) {
         const cloudRes = await cloudinary.uploader.upload(file.path, {
           resource_type: 'auto',
         });
-    
-        await db.insertFile(file, cloudRes.secure_url, user.id, folderId);
+
+        await db.insertFile(file, cloudRes, user.id, folderId);
         resolve();
       } catch(err) {
         console.error(err);
@@ -72,8 +72,15 @@ async function handleEditFile(req, res) {
 
 async function handleDeleteFile(req, res) {
   const { fileId } = req.params;
-  const { folderId } = await db.removeFileById(fileId);
-  res.redirect(`/folder/${folderId}`);
+  const removedFile = await db.removeFileById(fileId);
+  
+  try {
+    await cloudinary.uploader.destroy(fileId, {resource_type: removedFile.type});
+  } catch(err) {
+    console.error(err);
+  }
+
+  res.redirect(`/folder/${removedFile.folderId}`);
 }
 
 async function handleDownloadFile(req, res) {

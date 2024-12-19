@@ -116,11 +116,13 @@ async function removeFolderById(folderId) {
   }
 }
 
-async function insertFile(file, URL, userId, folderId) {
+async function insertFile(file, cloudRes, userId, folderId) {
   try {
     const result = await prisma.file.create({
       data: {
-        URL: URL,
+        id: cloudRes.public_id,
+        URL: cloudRes.secure_url,
+        type: cloudRes.resource_type,
         name: file.filename,
         size: file.size,
         uploadTime: new Date(),
@@ -139,7 +141,7 @@ async function getFileDetailsById(fileId) {
   try {
     return await prisma.file.findUnique({
       where: {
-        id: +fileId,
+        id: fileId,
       }
     });
   } catch(err) {
@@ -166,7 +168,7 @@ async function removeFileById(fileId) {
   try {
     return await prisma.file.delete({
       where: {
-        id: +fileId,
+        id: fileId,
       }
     });
   } catch(err) {

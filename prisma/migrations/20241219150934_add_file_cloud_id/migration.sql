@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "File" ALTER COLUMN "cloudId" DROP DEFAULT;

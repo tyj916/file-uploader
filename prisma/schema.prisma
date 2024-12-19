@@ -31,11 +31,12 @@ model User {
 }
 
 model File {
-  id         Int      @id @default(autoincrement())
+  id         String   @id 
   URL        String
   name       String
   size       Int
   uploadTime DateTime @default(now())
+  type       String
   ownerId    Int
   owner      User     @relation(fields: [ownerId], references: [id])
   folderId   Int
