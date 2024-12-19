@@ -1,3 +1,91 @@
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f0f0f0;
+}
+
+a {
+  color: black;
+}
+
+input {
+  padding: 3px 6px;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: white;
+}
+
+button {
+  background-color: white;
+  padding: 3px 9px;
+  border-radius: 6px;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+button a:hover {
+  color: white;
+  cursor: pointer;
+}
+
+nav {
+  padding: 0;
+  display: flex;
+  background-color: white;
+}
+
+nav a {
+  flex: 1;
+  text-align: center;
+  padding: 16px;
+}
+
+nav a:hover {
+  background-color: #f0f0f0;
+}
+
+main {
+  padding: 16px;
+  max-width: 100%;
+}
+
+main #folder-content table {
+  background-color: white;
+  width: 100%;
+  padding: 4px;
+  padding-bottom: 8px;
+  border-radius: 8px;
+  border: 2px solid black;
+}
+
+main #folder-content table th {
+  border-bottom: 1px solid grey;
+  padding: 8px 12px;
+}
+
+main #folder-content table tr:hover {
+  background-color: #f0f0f0;
+}
+
+main #folder-content table td {
+  padding: 4px 12px;
+}
+
+main #folder-content table td.options {
+  display: flex;
+  gap: 8px;
+}
+
+section#add-new {
+  margin-bottom: 18px;
+}
+
 #add-new-form {
   display: block;
 }

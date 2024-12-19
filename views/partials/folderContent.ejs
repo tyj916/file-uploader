@@ -1,14 +1,16 @@
-<section>
+<section id="folder-content">
   <% if (folder.parentId) { %>
     <a href="/folder/<%= folder.parentId %>">&lt; Parent</a>
   <% } %>
   <h1><%= folder.name %></h1>
-  <table>
+  <%- include('./addNewForm') %>
+  <table cellspacing="0">
     <tr>
       <th>Type</th>
       <th>Name</th>
       <th>Upload Time</th>
       <th>Size</th>
+      <th colspan="3">Options</th>
     </tr>
     <% folder.childFolders.forEach(folder => { %>
       <tr>
@@ -16,10 +18,10 @@
         <td><a href="/folder/<%= folder.id %>"><%= folder.name %></a></td>
         <td>-</td>
         <td>-</td>
-        <td>
-          <a href="/folder/<%= folder.id %>/edit">Edit</a>
-        </td>
-        <td>
+        <td class="options">
+          <button type="button">
+            <a href="/folder/<%= folder.id %>/edit">Edit</a>
+          </button>
           <form action="/folder/<%= folder.id %>/delete" method="POST">
             <button 
               type="submit" 
@@ -37,10 +39,10 @@
         <td><a href="/folder/<%= folder.id %>/file/<%= file.id %>"><%= file.name %></a></td>
         <td><%= new Date(file.uploadTime).toLocaleString('en-SG') %></td>
         <td><%= file.size %> bytes</td>
-        <td>
-          <a href="/folder/<%= file.folderId %>/file/<%= file.id %>/edit">Edit</a>
-        </td>
-        <td>
+        <td class="options">
+          <button type="button">
+            <a href="/folder/<%= file.folderId %>/file/<%= file.id %>/edit">Edit</a>
+          </button>
           <form action="/folder/<%= file.folderId %>/file/<%= file.id %>/delete" method="POST">
             <button 
               type="submit" 
@@ -49,8 +51,6 @@
               Delete
             </button>
           </form>
-        </td>
-        <td>
           <form action="/folder/<%= file.folderId %>/file/<%= file.id %>/download" method="GET">
             <button type="submit">Download</button>
           </form>
