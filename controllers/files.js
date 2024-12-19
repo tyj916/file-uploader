@@ -1,11 +1,36 @@
+require('dotenv').config();
 const path = require('node:path');
 const fs = require('fs');
+const cloudinary = require('cloudinary').v2;
 const db = require('../prisma/queries');
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_KEY,
+  api_secret: process.env.CLOUD_SECRET,
+});
+
+async function saveFilesToCloud(files) {
+  const results = [];
+
+  files.forEach(async (file) => {
+    results.push(
+      await cloudinary.uploader.upload(file.path, {
+        resource_type: 'auto',
+        public_id: file.name,
+      })
+    );
+  })
+
+  return results;
+} 
 
 async function handleFileUpload(req, res) {
   const user = req.user;
   const folderId = req.params.currentFolderId || (await db.getRootFolderByOwnerId(user.id)).id;
   await db.uploadFiles(req.files, user.id, folderId);
+  const cloudRes = await saveFilesToCloud(req.files);
+  console.log(cloudRes);
 
   res.redirect('/');
 }
