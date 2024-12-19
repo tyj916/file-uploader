@@ -1,6 +1,7 @@
 require('dotenv').config();
 const path = require('node:path');
 const fs = require('fs');
+const https = require('https');
 const cloudinary = require('cloudinary').v2;
 const db = require('../prisma/queries');
 
@@ -78,7 +79,10 @@ async function handleDeleteFile(req, res) {
 async function handleDownloadFile(req, res) {
   const { fileId } = req.params;
   const file = await db.getFileDetailsById(fileId);
-  res.download(`uploads/${file.name}`);
+  https.get(file.URL, (response) => {
+    res.set('Content-Disposition', `attachment; filename=${file.name}`);
+    response.pipe(res);
+  });
 }
 
 module.exports = {
