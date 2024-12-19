@@ -35,7 +35,7 @@
       <tr>
         <td>File</td>
         <td><a href="/folder/<%= folder.id %>/file/<%= file.id %>"><%= file.name %></a></td>
-        <td><%= file.uploadTime %></td>
+        <td><%= new Date(file.uploadTime).toLocaleString('en-SG') %></td>
         <td><%= file.size %> bytes</td>
         <td>
           <a href="/folder/<%= file.folderId %>/file/<%= file.id %>/edit">Edit</a>
