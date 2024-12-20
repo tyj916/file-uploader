@@ -4,6 +4,7 @@ body {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #f0f0f0;
+  min-height: 100vh;
 }
 
 a {
@@ -112,4 +113,30 @@ section#add-new {
 
 .container .info-title {
   text-decoration: underline;
+}
+
+#log-in-form {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#log-in-form .container {
+  background-color: white;
+  padding: 32px;
+  border: 2px solid black;
+  border-radius: 8px;
+}
+
+#log-in-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#log-in-form form input {
+  width: 100%;
 }

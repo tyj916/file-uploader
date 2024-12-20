@@ -1,13 +1,17 @@
-<h1>Create account</h1>
-<%- include('./formErrors') %>
-<form action="/sign-up" method="POST">
-  <input type="text" name="firstName" placeholder="First Name (optional)">
-  <input type="text" name="lastName" placeholder="Last Name (optional)">
-  <input type="text" name="username" placeholder="Username" required>
-  <input type="password" name="password" placeholder="Password" required>
-  <input type="password" name="confirmPassword" placeholder="Confirm password" required>
-  <section class="form-button">
-    <button type="submit">Sign Up</button>
-  </section>
-</form>
-<p>Already have an account? <a href="/log-in">Log in here!</a></p>
+<section id="log-in-form">
+  <div class="container">
+    <h1>Create account</h1>
+    <%- include('./formErrors') %>
+    <form action="/sign-up" method="POST">
+      <input type="text" name="firstName" placeholder="First Name (optional)">
+      <input type="text" name="lastName" placeholder="Last Name (optional)">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <input type="password" name="confirmPassword" placeholder="Confirm password" required>
+      <section class="form-button">
+        <button type="submit">Sign Up</button>
+      </section>
+    </form>
+    <p>Already have an account? <a href="/log-in">Log in here!</a></p>
+  </div>
+</section>
