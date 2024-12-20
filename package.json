@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prisma_init": "npx prisma migrate dev --name init",
-    "start": "node app.js",
-    "launch": "npm run prisma_init && npm run start"
+    "build": "node app.js",
+    "start": "npm run prisma_init && npm run build"
   },
   "keywords": [],
   "author": "",
