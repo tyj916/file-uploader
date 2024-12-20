@@ -34,6 +34,10 @@ button a:hover {
   cursor: pointer;
 }
 
+.buttons-horizontal {
+  display: flex;
+}
+
 nav {
   padding: 0;
   display: flex;
@@ -51,8 +55,20 @@ nav a:hover {
 }
 
 main {
-  padding: 16px;
+  margin: 16px;
   max-width: 100%;
+}
+
+main .container {
+  background-color: white;
+  padding: 16px;
+  border: 2px solid black;
+  border-radius: 8px;
+}
+
+main .folder-nav {
+  display: inline-block;
+  margin-bottom: 16px;
 }
 
 main #folder-content table {
@@ -92,4 +108,8 @@ section#add-new {
 
 #add-new-form.hide-form {
   display: none;
+}
+
+.container .info-title {
+  text-decoration: underline;
 }

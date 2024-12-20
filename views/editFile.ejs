@@ -9,14 +9,18 @@
 <body>
   <%- include('./partials/nav') %>
 
-  <a href="/folder/<%= file.folderId %>">&lt; Back to folder</a>
-  <h1>Edit <%= file.name %></h1>
-  <form action="/folder/<%= file.folderId %>/file/<%= file.id %>/edit" method="POST">
-    <label for="name">File name:</label>
-    <input type="text" id="name" name="name" value="<%= file.name %>" required>
-    <section class="form-button">
-      <button type="submit">Update</button>
-    </section>
-  </form>
+  <main>
+    <a href="/folder/<%= file.folderId %>" class="folder-nav">&lt; Back to folder</a>
+    <div class="container">
+      <h1>Edit <%= file.name %></h1>
+      <form action="/folder/<%= file.folderId %>/file/<%= file.id %>/edit" method="POST">
+        <label for="name">File name:</label>
+        <input type="text" id="name" name="name" value="<%= file.name %>" required>
+        <section class="form-button">
+          <button type="submit">Update</button>
+        </section>
+      </form>
+    </div>
+  </main>
 </body>
 </html>
