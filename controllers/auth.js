@@ -12,10 +12,10 @@ const emptyErr = 'required';
 const minLengthErr = 'must be at least 6 characters';
 const validateSignUp = [
   [
-    body('firstName').trim()
+    body('firstName').optional({checkFalsy: true}).trim()
       .isAlpha().withMessage(`First name ${alphaErr}`)
       .isLength({ min: 1, max: 255 }).withMessage(`First name ${lengthErr}`),
-    body('lastName').trim()
+    body('lastName').optional({checkFalsy: true}).trim()
       .isAlpha().withMessage(`Last name ${alphaErr}`)
       .isLength({ min: 1, max: 255 }).withMessage(`Last name ${lengthErr}`),
     body('username').trim()
